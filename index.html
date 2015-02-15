@@ -5,6 +5,7 @@
     <script src="data_generator.js"></script>
   </head>
   <body>
+    <h1>Twittler Project -- MKS14</h1>
     <script>
 
       $(document).ready(function(){
@@ -22,9 +23,30 @@
           index -= 1;
         }
 
-        $body.click(function(){
-          alert("Clicked on user " + event.target.id);
+        $(' div ').click(function(){
+          alert("clicked on " + event.target.id);
+          // if(event.target.id = 'DIV')
+          // { 
+          //   //re-run load all tweets
+          // }
+          // else {
+            $(' div ').toggle(1000, showUser(event.target.id));
+          // };
         });
+
+        var showUser = function(user){
+          var uTweets = [];
+          uTweets = streams.users[user];
+          var i = uTweets.length - 1;
+          alert("retrieved tweets for user: " + user);
+          while (i >=0){
+            var tweet = uTweets[i];
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweet.user + ": " + tweet.message + ": " + tweet.created_at);
+            $tweet.appendTo($body);
+            i -= 1;
+          };
+        };
       });
 
     </script>
