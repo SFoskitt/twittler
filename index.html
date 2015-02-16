@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Full - Start Bootstrap Template</title>
+    <title>MKS14 - Twittler Project</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
     <link href="css/full.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-    <script src="js/xdate.js"></script>	
+    <script src="js/moment.js"></script>	
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -41,13 +41,15 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
+<!--                 <button type="button" class="text-center" >
+<!-- 				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" -->
+<!--                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                    <span class="icon-bar"></span> -->
+<!--                 </button> -->
+					<a class=" text-center" href="#">New Tweets</a>
+<!-- 						navbar-brand -->
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 <!--             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -71,32 +73,33 @@
     <!-- Put your page content here! -->
 
 <div class="container full">
-
+<!-- <br/><br/><br/>
+</div> -->
+<div class="container full">
     <script>
 
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('');
+        //$body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          //var u = streams.home[index].tweet.user;
+        var i = streams.home.length - 1;
+		while(i >= 0){
+          var tweet = streams.home[i];
           var divId = tweet.user;
           var $tweet = $('<div class="text-center full" id=' + tweet.user + '></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + ': ' + tweet.created_at);
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + ': ' + moment(tweet.created_at).fromNow());
           $tweet.appendTo($body);
-          index -= 1;
+		  i -= 1;
         }
-
+//
         $(' div ').click(function(){
-          alert("clicked on " + event.target.id);
+          //alert("clicked on " + event.target.id);
           // if(event.target.id = 'DIV')
           // { 
           //   //re-run load all tweets
           // }
           // else {
-            $(' div ').toggle(1000, showUser(event.target.id));
+          $(' div ').toggle(100, showUser(event.target.id));
           // };
         });
 
@@ -107,8 +110,8 @@
           alert("retrieved tweets for user: " + user);
           while (i >=0){
             var tweet = uTweets[i];
-            var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ": " + tweet.message + ": " + tweet.created_at);
+            var $tweet = $('<div class="text-center full"></div>');
+            $tweet.text('@' + tweet.user + ": " + tweet.message + ": " + moment(tweet.created_at).startOf('hour').fromNow());
             $tweet.appendTo($body);
             i -= 1;
           };
