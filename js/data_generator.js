@@ -46,12 +46,15 @@ var generateRandomTweet = function(){
   addTweet(tweet);
 };
 
+for(var i = 0; i < 10; i++){
+  generateRandomTweet();
+}
+
 var scheduleNextTweet = function(){
-	for(var i = 0; i < 2; i++){
-	  generateRandomTweet();
-	}
+  generateRandomTweet();
   setTimeout(scheduleNextTweet, Math.random() * 1500);
 };
+scheduleNextTweet();
 
 // utility function for letting students add "write a tweet" functionality
 // (note: not used by the rest of this file.)
