@@ -27,7 +27,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#" onClick="showAll();">NEW TWEETS</a>
+                <a class="navbar-brand" href="#" id="new-tweets">NEW TWEETS</a>
             </div>
 		</div>
 	</nav>
@@ -35,8 +35,9 @@
     <script>
 
         var $body = $('body');
-		var i = streams.home.length - 1;
+
 		var showAll = function(){
+		var i = streams.home.length - 1;			
 			while(i >= 0){
 			  var tweet = streams.home[i];
 			  var divId = tweet.user;
@@ -51,10 +52,10 @@
           var uTweets = [];
           uTweets = streams.users[user];
           var i = uTweets.length - 1;
-          alert("retrieved tweets for user: " + user);
+          //alert("retrieved tweets for user: " + user);
           while (i >=0){
             var tweet = uTweets[i];
-            var $tweet = $('<div class="text-center full uTweets"></div>');
+            var $tweet = $('<div class="text-center full tweet"></div>');
             $tweet.text('@' + tweet.user + ": " + tweet.message + ": " + moment(tweet.created_at).fromNow());
             $tweet.appendTo($body);
             i -= 1;
@@ -63,14 +64,15 @@
 
 		$(document).ready(showAll);
 
-		$(document).ready(function(){
-	
-        $('div').on("click", function(){
-			alert("clicked on " + event.srcElement.id);
-          $(' .tweet ').hide(1000, showUser(event.srcElement.id));
-        });
-      });
-
+        $(document).on('click', 'div', function(){
+			//alert("clicked on " + event.srcElement.id);
+			var its = event.srcElement.id;
+			if (its !== "new-tweets"){
+				$(' .tweet ').hide(500, showUser(event.srcElement.id));
+			} else {
+				$(' .tweet ').hide(500, showAll());
+			};
+		});
     </script>
 
 </body>
