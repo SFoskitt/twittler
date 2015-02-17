@@ -23,10 +23,10 @@
 
 <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header text-center">
-				<a class=" text-center" href="#">New Tweets</a>
+				<a class=" text-center" href="#">NEW TWEETS</a>
             </div>
         </div>
     </nav>
@@ -41,21 +41,15 @@
 		while(i >= 0){
           var tweet = streams.home[i];
           var divId = tweet.user;
-          var $tweet = $('<div class="text-center full" id=' + tweet.user + '></div>');
+          var $tweet = $('<div id=' + tweet.user + ' class="text-center full tweet"></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message + ': ' + moment(tweet.created_at).fromNow());
           $tweet.appendTo($body);
 		  i -= 1;
         }
 
-        $(' div ').on("click", function(){
-          alert("clicked on " + event.target.id);
-          // if(event.target.id = 'DIV')
-          // { 
-          //   //re-run load all tweets
-          // }
-          // else {
-          $(' div ').toggle(100, showUser(event.target.id));
-          // };
+        $('div').on("click", function(){
+			alert("clicked on " + event.srcElement.id);
+          $(' .tweet ').hide(1000, showUser(event.srcElement.id));
         });
 
         var showUser = function(user){
