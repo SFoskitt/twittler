@@ -40,9 +40,12 @@
 		var i = streams.home.length - 1;			
 			while(i >= 0){
 			  var tweet = streams.home[i];
-			  var divId = tweet.user;
 			  var $tweet = $('<div id=' + tweet.user + ' class="text-center full tweet"></div>');
 			  $tweet.text('@' + tweet.user + ': ' + tweet.message + ': ' + moment(tweet.created_at).fromNow());
+              $tweet.css({
+                fontweight:"bold",
+                fontSize:"18px"
+                });
 			  $tweet.appendTo($body);
 			  i -= 1;
 			}
@@ -52,11 +55,18 @@
           var uTweets = [];
           uTweets = streams.users[user];
           var i = uTweets.length - 1;
-          //alert("retrieved tweets for user: " + user);
+          $body.append('<div font-size="18px" font-color="navy" class="text-center full tweet"><font color="navy" size="3"><u>TWEETS FROM USER @' + user+ '</u></font></div>');
           while (i >=0){
             var tweet = uTweets[i];
             var $tweet = $('<div class="text-center full tweet"></div>');
+
             $tweet.text('@' + tweet.user + ": " + tweet.message + ": " + moment(tweet.created_at).fromNow());
+
+            $tweet.css({
+                color: "navy",
+                fontSize:"18px"
+            });
+
             $tweet.appendTo($body);
             i -= 1;
           };
@@ -68,8 +78,10 @@
 			//alert("clicked on " + event.srcElement.id);
 			var its = event.srcElement.id;
 			if (its !== "new-tweets"){
+                $(' #new-tweets').text('ALL TWEETS');
 				$(' .tweet ').hide(500, showUser(event.srcElement.id));
 			} else {
+                $(' #new-tweets').text('NEW TWEETS');
 				$(' .tweet ').hide(500, showAll());
 			};
 		});
